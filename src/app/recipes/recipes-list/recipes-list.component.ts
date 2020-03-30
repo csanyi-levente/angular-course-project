@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Recipe} from '../model/recipe.model';
+import {RecipeService} from '../services/recipe.service';
 
 @Component({
   selector: 'app-recipes-list',
@@ -7,22 +8,10 @@ import {Recipe} from '../model/recipe.model';
   styleUrls: ['./recipes-list.component.css']
 })
 export class RecipesListComponent implements OnInit {
-  recipes: Recipe[] = [
-    // tslint:disable-next-line:max-line-length
-    new Recipe('dummy', 'test', 'https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/foods-that-lower-cholesterol-1296x728-feature.jpg?w=1155&h=1528'),
-    // tslint:disable-next-line:max-line-length
-    new Recipe('dummy recipe', 'test', 'https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/foods-that-lower-cholesterol-1296x728-feature.jpg?w=1155&h=1528'),
-    // tslint:disable-next-line:max-line-length
-    new Recipe('test recipe', 'test', 'https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/foods-that-lower-cholesterol-1296x728-feature.jpg?w=1155&h=1528')
-  ];
-
-  @Output() recipeWasSelected = new EventEmitter<Recipe>();
-  constructor() { }
+  recipes: Recipe[];
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
-  }
-
-  onRecipeSelected(recipeElement: Recipe) {
-    this.recipeWasSelected.emit(recipeElement);
+    this.recipes = this.recipeService.getRecipes();
   }
 }
