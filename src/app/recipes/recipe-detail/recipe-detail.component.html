@@ -18,7 +18,7 @@
        <span class="caret"></span>
      </button>
      <ul class="dropdown-menu">
-       <li><a href="#">Add to Shopping List</a></li>
+       <li><a (click)="addToShoppingList()">Add to Shopping List</a></li>
        <li><a href="#">Edit Recipe</a></li>
        <li><a href="#">Delete Recipe</a></li>
      </ul>
@@ -33,7 +33,8 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-12">
-    Ingredients
+  <div class="col-xs-12" *ngFor="let ing of recipe.ingredients">
+    <p> {{ ing.name }} | {{ ing.amount }} </p>
+    <hr>
   </div>
 </div>
